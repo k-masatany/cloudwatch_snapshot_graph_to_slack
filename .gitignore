@@ -1,0 +1,6 @@
+bin/*
+.env
+env.json
+event_file.json
+output.yaml
+node_modules

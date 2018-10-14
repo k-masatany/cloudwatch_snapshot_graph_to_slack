@@ -1,0 +1,119 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  cloudwatch_snapshot_graph_to_slack
+  Cloudwatch alarm notification to Slack with snapshot graph.
+
+Parameters:
+  SNSTopic:
+    Type: String
+    Default: 'alarm-notice-topic'
+  AssetsBucketName:
+    Type: String
+    Default: 'image-upload-bucket'
+  WebHookURL:
+    Type: String
+    Default: 'https://example.com'
+  Channel:
+    Type: String
+    Default: 'slack-channel'
+  Username:
+    Type: String
+    Default: 'SlackBot'
+  IconEmoji:
+    Type: String
+    Default: ':slack:'
+
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: 'post sns messages to slack incoming webhooks'
+      CodeUri: cloudwatch_snapshot_graph_to_slack/
+      Handler: app.lambdaHandler
+      Runtime: nodejs8.10
+      Timeout: 30
+      MemorySize: 512
+      Events:
+        SNS:
+          Type: SNS
+          Properties:
+            Topic: !Ref Topic
+      Environment:
+        Variables:
+          SLACK_WEBHOOK_URL: !Ref WebHookURL
+          SLACK_CHANNEL: !Ref Channel
+          SLACK_USERNAME: !Ref Username
+          SLACK_ICONEMOJI: !Ref IconEmoji
+          BACKET_NAME: !Ref AssetsBucketName
+          TZ: Asia/Tokyo
+      Role: !GetAtt IamRole.Arn
+
+  AssetsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref AssetsBucketName
+      AccessControl: PublicRead
+      LifecycleConfiguration:
+        Rules:
+          - Status: Enabled
+            ExpirationInDays: 7
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref AssetsBucket
+      PolicyDocument:
+        Statement:
+          - Action:
+              - 's3:GetObject'
+            Effect: 'Allow'
+            Resource: !Sub arn:aws:s3:::${AssetsBucket}/*
+            Principal: '*'
+
+  Topic:
+    Type: 'AWS::SNS::Topic'
+    Properties:
+      TopicName: !Ref SNSTopic
+
+  IamRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: 'sts:AssumeRole'
+      Policies:
+        - PolicyName: 'cloudwatch_snapshot_graph_to_slack'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: 'Allow'
+                Action:
+                  - 'autoscaling:Describe*'
+                  - 'cloudwatch:Describe*'
+                  - 'cloudwatch:Get*'
+                  - 'cloudwatch:List*'
+                  - 'logs:Get*'
+                  - 'logs:List*'
+                  - 'logs:Describe*'
+                  - 'logs:TestMetricFilter'
+                  - 'logs:FilterLogEvents'
+                  - 'sns:List*'
+                  - 'sns:Get*'
+                Resource: '*'
+              - Effect: 'Allow'
+                Action:
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource: 'arn:aws:logs:*:*:*'
+              - Effect: 'Allow'
+                Action:
+                  - s3:PutObject
+                Resource: !Sub arn:aws:s3:::${AssetsBucket}/*

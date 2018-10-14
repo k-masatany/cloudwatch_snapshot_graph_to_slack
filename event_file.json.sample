@@ -1,0 +1,22 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:ap-northeast-1:000000000000:test-for-slack:012345678-1234-5678-0978-09876543",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "c6db0df2-f375-576c-b62f-59c918c6ded2",
+        "TopicArn": "arn:aws:sns:ap-northeast-1:000000000000:test-for-slack",
+        "Subject": "ALARM: \"test instance CPUUtilization\" in Asia Pacific (Tokyo)",
+        "Message": "{\"AlarmName\":\"test instance CPUUtilization\",\"AlarmDescription\":\"test instance CPUUtilization\",\"AWSAccountId\":\"000000000000\",\"NewStateValue\":\"ALARM\",\"NewStateReason\":\"Threshold Crossed: 1 out of the last 1 datapoints [61.328702417338 (13/10/18 12:37:00)] was greater than or equal to the threshold (50.0) (minimum 1 datapoint for OK -> ALARM transition).\",\"StateChangeTime\":\"2018-10-13T12:47:47.860+0000\",\"Region\":\"Asia Pacific (Tokyo)\",\"OldStateValue\":\"OK\",\"Trigger\":{\"MetricName\":\"CPUUtilization\",\"Namespace\":\"AWS/EC2\",\"StatisticType\":\"Statistic\",\"Statistic\":\"AVERAGE\",\"Dimensions\":[{\"name\":\"InstanceId\",\"value\":\"i-00000000000000000\"}],\"Period\":300,\"EvaluationPeriods\":1,\"ComparisonOperator\":\"GreaterThanOrEqualToThreshold\",\"Threshold\":50.0,\"TreatMissingData\":\"\",\"EvaluateLowSampleCountPercentile\":\"\"}}",
+        "Timestamp": "2018-10-01T00:00:00.000Z",
+        "SignatureVersion": "1",
+        "Signature": "OTlyRzOVAZhWGDlJRb1nMQ5Dzb/GWQJbHfL9Rkb7xK9nnY0VU4FAzDvk6A2/BjkgA+cBEgx+gnM86tqkmQymWnEB68JSG7J7Q8celPnIOr1z9VPLlA2ug7ES+ie3UEqicQ996ebaEBX8gTx3+R3sf/DnGzJ0p0mYOFfQGAXlE+CEIB8cTo+Sy8+Dc43/Unf8PfBbJcpe/6vb4kYFPtbwQTCycaE5xBJ0GgnhOQxt5Sc1YHVj68o9uvj2wG5zfP5R3FB9kPz5kDYs258FtVfj8OqtChdACIannAdSIR4Z79TDrYxis/q61pI1Dk2HXQ8yJfS1BeHN1H6A32BG/LpKfA==",
+        "SigningCertUrl": "https://sns.ap-northeast-1.amazonaws.com/SimpleNotificationService-ac565b8b1a6c5d002d285f9598aa1d9b.pem",
+        "UnsubscribeUrl": "https://sns.ap-northeast-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:ap-northeast-1:000000000000:test-for-slack:ddc85eb2-1979-4405-b999-dce722efde33",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}
