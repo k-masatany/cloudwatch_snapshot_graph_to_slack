@@ -6,8 +6,8 @@ const BASE_URL = process.env.SLACK_WEBHOOK_URL
 
 async function getMetricsGraphFromCloudWatch(MessageId, message) {
     const props = {
-        width: 480,
-        height: 320,
+        width: 320,
+        height: 240,
         start: "-PT1H",
         end: "PT0H",
         timezone: "+0900",

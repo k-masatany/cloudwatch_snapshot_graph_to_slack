@@ -1,12 +1,5 @@
 # cloudwatch snapshot graph to slack
 
-## Configure
-
-```
-$ cp .env.sample .env
-$ vi .env
-```
-
 ## Set AWS Credential
 
 ```
@@ -15,7 +8,20 @@ $ export AWS_SECRET_ACCESS_KEY=abcdefghijklmn
 $ export AWS_DEFAULT_REGION=ap-northeast-1
 ```
 
-## Usage
+## Create S3 Bucket for SAM Packaging
+
+```
+$ aws s3 mb s3://${bucket-for-sam-packaging}
+```
+
+## Configure Environment
+
+```
+$ cp .env.sample .env
+$ vi .env
+```
+
+## Deploy
 
 ```
 $ run deps # need nodejs 8.10
