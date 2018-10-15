@@ -1,4 +1,4 @@
-"use strcit"
+"use strict"
 
 const axios = require("axios")
 var AWS = require("aws-sdk")
