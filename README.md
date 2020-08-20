@@ -24,7 +24,7 @@ $ vi .env
 ## Deploy
 
 ```
-$ run deps # need nodejs 8.10
-$ run package
-$ run deploy
+$ make deps # need nodejs 12.x
+$ make package
+$ make deploy
 ```
