@@ -1,15 +1,15 @@
 {
-  "name": "cloudwatch_snapshot_graph_to_slack",
-  "version": "1.0.0",
-  "description": "Cloudwatch alarm notification to Slack with snapshot graph.",
-  "main": "app.js",
-  "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
-  "author": "k-masatany",
-  "license": "MIT",
-  "dependencies": {
-    "aws-sdk": "^2.334.0",
-    "axios": "^0.18.1"
-  },
-  "scripts": {},
-  "devDependencies": {}
+    "name": "cloudwatch_snapshot_graph_to_slack",
+    "version": "1.0.0",
+    "description": "Cloudwatch alarm notification to Slack with snapshot graph.",
+    "main": "app.js",
+    "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
+    "author": "k-masatany",
+    "license": "MIT",
+    "dependencies": {
+        "aws-sdk": "^2.738.0",
+        "axios": "^0.19.2"
+    },
+    "scripts": {},
+    "devDependencies": {}
 }
